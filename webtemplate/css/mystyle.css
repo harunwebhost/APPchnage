@@ -1,0 +1,19 @@
+.un_assigned{
+	font-weight: bold;
+	  background-color: transparent!important;
+}
+.assigned{
+	font-weight: normal;
+	
+}
+.font-white li a{
+	color: white;
+}
+.font-white li a :hover{
+	color: #1f1215;
+	font-weight: bold;
+}
+
+.navbar-brand{
+color: white;
+}    
