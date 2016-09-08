@@ -5,7 +5,7 @@ $myusername=sql_injection($_POST['username']);
 
 $mypassword=sql_injection($_POST['password']); 
 
-$sql="SELECT * FROM app_authonticate WHERE user_email='$myusername' and user_password='$mypassword' AND status='1'";
+ $sql="SELECT * FROM app_authonticate WHERE user_email='$myusername' and user_password='$mypassword' AND status='1'";
 $result=execute_sql_query($sql);
 $count=sql_fetch_num_rows($result);
 if($count==1){

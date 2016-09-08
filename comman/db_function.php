@@ -43,9 +43,11 @@ function update_otp($login_id){
 function track_login(){
     $connection=db_connection();
     $ip=get_user_ip_address();
+    $login_id=$_SESSION['loggin_id'];
+    $logged_user_type=$_SESSION['login_userntype'];
     $current_time=current_data_time();
-    $sql_track="INSERT INTO app_logins_history (logged_ip,logged_time)
-    VALUES ('$ip','$current_time')";
+    $sql_track="INSERT INTO app_logins_history (logged_ip,user_type,logged_id,logged_time)
+    VALUES ('$ip','$logged_user_type','$login_id','$current_time')";
     mysqli_query($connection,$sql_track);
     $track_id=mysqli_insert_id($connection);   
     return $track_id;

@@ -10,7 +10,13 @@ $count=sql_fetch_num_rows($result);
 if($count==1){
 	update_otp($login_id);
 	$_SESSION['login_history_id']=track_login();
-	page_redirection('../master/','Logged In');
+	$login_userntype=$_SESSION['login_userntype'];
+	if($login_userntype=="master"){
+		page_redirection('../master/dashboard.php','Logged In');
+	}if($login_userntype=="distric_user"){
+		page_redirection('../distric/dashboard.php','Logged In');
+	}
+	
 }
 else {
 	update_otp($login_id);
