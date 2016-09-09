@@ -15,9 +15,8 @@
  				$message=urlencode('Record updated');
  				header("location:$page?message=$message");
  			}
- 		}elseif(){
- 			
  		}
+ 		
   ?>
 <?php 
 	if(isset($_GET['message'])){

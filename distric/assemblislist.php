@@ -5,7 +5,7 @@
 		
 
 				<?php 
-					
+						
 					  $currentpage=urldecode('view_users.php?show=Users&page1=district_users&id=district_user_id');
 					/*get page header*/
 					if(isset($_GET['show'])){
@@ -17,7 +17,8 @@
 						 $get_lead="SELECT * FROM assemblis asmbly, districts distric 
 						 where
 						 asmbly.district_id=distric.district_id
-
+						 AND
+						 asmbly.district_id='$district_user_id'
 						 ";
 					}
 				 ?>
@@ -81,7 +82,7 @@
             </div>
        
         </div>
-	<?php require_once('createnew_distric.php'); ?>
+	
 	<?php require_once('../webtemplate/footer.php'); ?> 
 	
 	<script>

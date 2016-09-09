@@ -29,8 +29,14 @@
             </ul>
 
             <!-- /.navbar-top-links -->
+        <?php if($_SESSION['login_userntype']=="master"){
+               require_once('master_menus.php'); 
+            }
+            if($_SESSION['login_userntype']=="distric_user"){
+                require_once('distric_menus.php'); 
 
-         <?php require_once('master_menus.php'); ?>
+            }
+        ?>
 
 </nav>
 

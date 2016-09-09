@@ -258,5 +258,16 @@ set_time_limit(0);
             return "";
         }
     }
+
+    function logged_distric_users(){
+        $logged_email_address=$_SESSION['login_email'];
+        $sql="SELECT * FROM district_users WHERE  district_user_email='$logged_email_address'";
+        $excute_sql=execute_sql_query($sql);
+        $sql_fech_array=execute_fetch($excute_sql);
+        $disctric_information['district_user_email']  = $sql_fech_array['district_user_email'];
+        $disctric_information['district_user_mobile']  = $sql_fech_array['district_user_mobile'];
+        $disctric_information['district_user_id']  = $sql_fech_array['district_user_id'];
+        return $disctric_information;
+    }
  ?>
 

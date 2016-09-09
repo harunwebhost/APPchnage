@@ -1,27 +1,33 @@
 <?php require_once('../webtemplate/headtags.php'); ?>
 <?php require_once('../webtemplate/header_nav.php'); ?>
- 
-	
-		
-
+				
 				<?php 
-					
-					  $currentpage=urldecode('view_users.php?show=Users&page1=district_users&id=district_user_id');
 					/*get page header*/
 					if(isset($_GET['show'])){
 						$title=$_GET['show'];
 					}else{
 						$title="Total Leads";
 					}
-					if($title=="assemblis"){
-						 $get_lead="SELECT * FROM assemblis asmbly, districts distric 
-						 where
-						 asmbly.district_id=distric.district_id
-
-						 ";
+					if($title=="main"){
+						 $get_lead="SELECT * FROM app_leads al,campaigns cmpgs 
+						 WHERE al.campaign_group_name=cmpgs.campaign_id
+						 AND
+						 al.campaign_group_name='1'";
+						 
+					}if($title=="Internal"){
+						$get_lead="SELECT * FROM app_leads al,campaigns cmpgs 
+						 WHERE al.campaign_group_name=cmpgs.campaign_id
+						 AND
+						 al.campaign_group_name='2'";
+					}if($title=="Cause"){
+						$get_lead="SELECT * FROM app_leads al,campaigns cmpgs 
+						 WHERE al.campaign_group_name=cmpgs.campaign_id
+						 AND
+						 al.campaign_group_name='3'";
 					}
+
+						$title=$title." Campains Leads";
 				 ?>
-		
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -43,31 +49,42 @@
                                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 						    <thead>
 						    <tr>
-						        <th data-field="state" data-checkbox="true" ></th>
-						        <th data-field="lead_name" data-sortable="true">Name</th>
-						        <th data-field="lead_email"  data-sortable="true">Distric</th>
-						        <th data-field="lead_mobile" data-sortable="true">Ward</th>
-						        <th data-field="lead_city" data-sortable="true">Booth</th>
+						        <th></th>
+						        <th>Name</th>
+						        <th>Email</th>
+						        <th>Mobile</th>
+						        <th>Address</th>
+						        <th>Campain</th>
+						        <th>Distric Name</th>
+						        <th>update/Transfer</th>
 						        
+
 						    </tr>
 						    </thead>
 						    <?php 
 						    	
 						    	$execute=execute_sql_query($get_lead);
 						    	while ($disp=execute_fetch($execute)) {
-						    		
+						    		$lead_id=$disp['lead_id'];
 						    	?>
-						    <tr data-index="0">
+						    <tr>
 						    <td class="bs-checkbox">
-						    <input data-index="0" name="toolbar1" type="checkbox"></td>
-						    <td><?php echo $disp['assembly_name'];?></td>
+						    <input type="checkbox"></td>
+						    <td><?php echo $disp['lead_name'];?></td>
+						    <td><?php echo $disp['lead_email'];?></td>
+						    <td><?php echo $disp['lead_mobile'];?></td>
+						    <td><?php echo $disp['lead_address'];?></td>
+						    <td><?php echo $disp['campaign_name'];?></td>
 						    <td><?php echo $disp['district_name'];?></td>
-						    <td><?php echo $disp['ward_zip'];?></td>
-						    <td><?php echo $disp['pooling_booth'];?></td>
+						    <td> 
+						    <a href="edit_lead.php?edit_lead=<?php echo urldecode($lead_id)?>">Edit</a>
+						    </td>
+
 						   
 						    </tr>
 						    <?php }?>	
- </tbody>
+
+						 </tbody>
                                 </table>
                             </div>
                             <!-- /.table-responsive -->
