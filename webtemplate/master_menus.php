@@ -37,6 +37,7 @@
                <li> <a href="campain_leads.php?show=<?php echo urlencode('main');?>">Main Data </a> </li>
                <li> <a  href="campain_leads.php?show=<?php echo urlencode('Internal');?>"> Internal Campaign </a> </li>
                <li> <a href="campain_leads.php?show=<?php echo urlencode('Cause');?>">Cause Campaign  </a> </li>
+               <li> <a href="campain_details.php?show=<?php echo urlencode('Cause');?>">Campaigns</a> </li>
             </ul>
          </li>
          <!-- 3nd menu -->

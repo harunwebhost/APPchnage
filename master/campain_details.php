@@ -8,23 +8,11 @@
 					}else{
 						$title="Total Leads";
 					}
-					if($title=="main"){
-						 $get_lead="SELECT * FROM app_leads al,campaigns cmpgs 
-						 WHERE al.campaign_group_name=cmpgs.campaign_id
-						 AND
-						 al.campaign_group_name='1'";
-						 
-					}if($title=="Internal"){
-						$get_lead="SELECT * FROM app_leads al,campaigns cmpgs 
-						 WHERE al.campaign_group_name=cmpgs.campaign_id
-						 AND
-						 al.campaign_group_name='2'";
-					}if($title=="Cause"){
-						$get_lead="SELECT * FROM app_leads al,campaigns cmpgs 
-						 WHERE al.campaign_group_name=cmpgs.campaign_id
-						 AND
-						 al.campaign_group_name='3'";
-					}
+					$get_lead="SELECT * FROM 
+					campaigns camp,
+					districts dis
+					WHERE camp.district_id=dis.district_id
+					";
 
 						$title=$title." Campains Leads";
 				 ?>
@@ -54,33 +42,28 @@
 						    <tr>
 						        <th></th>
 						        <th>Name</th>
-						        <th>Email</th>
-						        <th>Mobile</th>
-						        <th>Address</th>
-						        <th>Campain</th>
-						        <th>Distric Name</th>
-						        <th>update/Transfer</th>
-						        
-
-						    </tr>
+						        <th>Distric</th>
+						         <th>Edit</th>
+						         <th>Delete</th>
+						     </tr>
 						    </thead>
 						    <?php 
 						    	
 						    	$execute=execute_sql_query($get_lead);
 						    	while ($disp=execute_fetch($execute)) {
-						    		$lead_id=$disp['lead_id'];
+						    		$campaign_id=$disp['campaign_id'];
 						    	?>
 						    <tr>
 						    <td class="bs-checkbox">
 						    <input type="checkbox"></td>
-						    <td><?php echo $disp['lead_name'];?></td>
-						    <td><?php echo $disp['lead_email'];?></td>
-						    <td><?php echo $disp['lead_mobile'];?></td>
-						    <td><?php echo $disp['lead_address'];?></td>
 						    <td><?php echo $disp['campaign_name'];?></td>
 						    <td><?php echo $disp['district_name'];?></td>
+						    
 						    <td> 
-						    <a href="edit_lead.php?edit_lead=<?php echo urldecode($lead_id)?>">Edit</a>
+						    <a href="edit_lead.php?edit_lead=<?php echo urldecode($campaign_id)?>">Edit</a>
+						    </td>
+						    <td> 
+						    <a href="edit_lead.php?edit_lead=<?php echo urldecode($campaign_id)?>">delete</a>
 						    </td>
 
 						   
