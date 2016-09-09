@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('db_function.php');
+require_once('sms.php');
 $myusername=sql_injection($_POST['username']); 
 
 $mypassword=sql_injection($_POST['password']); 
@@ -17,9 +18,14 @@ $_SESSION['login_username']=$login_username;
 $_SESSION['login_userntype']=$login_userntype;
 $_SESSION['login_email']=$_POST['username'];
 $_SESSION['loggin_id']=$get_login_detais['login_id'];
+$mobile=$get_login_detais['mobile_number'];
+
 $string = $myusername.'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 $string_shuffled = str_shuffle($string);
 $otp = substr($string_shuffled, 1, 7);
+$msg="OTP ".$otp;
+send_sms($mobile,$msg);
+
 $sql="UPDATE   app_authonticate SET  uniqid='$otp' 
 WHERE login_id='".$get_login_detais['login_id']."'";
 $result=execute_sql_query($sql);
