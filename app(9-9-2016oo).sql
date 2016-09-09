@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2016 at 05:38 PM
+-- Generation Time: Sep 09, 2016 at 06:50 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `app_authonticate` (
   `mobile_number` varchar(15) NOT NULL,
   `logged_time` datetime NOT NULL,
   `status` int(2) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `app_authonticate`
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `app_authonticate` (
 
 INSERT INTO `app_authonticate` (`login_id`, `user_email`, `user_password`, `user_type`, `logged_ip`, `uniqid`, `mobile_number`, `logged_time`, `status`) VALUES
 (1, 'ajaz@gmail.com', '1', 'master', '1', 'optisnotfound', '7411033926', '2016-09-01 00:00:00', 1),
-(2, 'asdfsa@gmail.com', 'c', 'distric_user', '', 'optisnotfound', '8899999', '0000-00-00 00:00:00', 1);
+(3, 'nayeem@gmail.com', '08892776023', 'distric_user', '', 'optisnotfound', '08892776023', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `app_leads` (
 --
 
 INSERT INTO `app_leads` (`lead_id`, `lead_name`, `lead_email`, `lead_mobile`, `lead_address`, `source_of_lead`, `district_name`, `assembly_name`, `ward_or_zp_name`, `polling_booth_no`, `campaign_group_name`, `voter_id`, `notepad`, `uploaded_date`, `uploaded_by`, `uploaded_ip`, `modified_date`, `modified_by`, `modified_ip`) VALUES
-(1, 'Demo1', 'a@gmail.com1', '7411033926', 'DWD1', 'source1', '', '', '', '', '1', 'voter1', 'response1', '05-09-2016 14:57:49', '::1', '1', '0', '0', '0'),
+(1, 'Demo1', 'a@gmail.com1', '7411033926', 'DWD1', 'source1', '1', '', '', '', '1', 'voter1', 'response1', '05-09-2016 14:57:49', '::1', '1', '0', '0', '0'),
 (2, 'Demo2', 'a@gmail.com2', '7411033927', 'DWD2', 'source2', '', '', '', '', '2', 'voter2', 'response2', '05-09-2016 14:57:49', '::1', '1', '0', '0', '0'),
 (3, 'Demo3', 'a@gmail.com3', '7411033928', 'DWD3', 'source3', '', '', '', '', '', 'voter3', 'response3', '05-09-2016 14:57:49', '::1', '1', '0', '0', '0'),
 (4, 'Demo4', 'a@gmail.com4', '7411033929', 'DWD4', 'source4', '', '', '', '', '', 'voter4', 'response4', '05-09-2016 14:57:49', '::1', '1', '0', '0', '0'),
@@ -223,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `app_logins_history` (
   `logged_id` int(11) NOT NULL,
   `logged_time` datetime NOT NULL,
   `logged_out_time` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `app_logins_history`
@@ -231,7 +231,10 @@ CREATE TABLE IF NOT EXISTS `app_logins_history` (
 
 INSERT INTO `app_logins_history` (`login_history_id`, `logged_ip`, `user_type`, `logged_id`, `logged_time`, `logged_out_time`) VALUES
 (1, '::1', 'master', 1, '2016-09-08 04:58:09', '2016-09-08 04:58:22'),
-(2, '::1', 'distric_user', 2, '2016-09-08 04:59:29', '0000-00-00 00:00:00');
+(2, '::1', 'distric_user', 2, '2016-09-08 04:59:29', '0000-00-00 00:00:00'),
+(3, '::1', 'master', 1, '2016-09-09 11:32:13', '2016-09-09 11:52:48'),
+(4, '::1', 'distric_user', 3, '2016-09-09 11:55:24', '2016-09-09 12:28:45'),
+(5, '::1', 'master', 1, '2016-09-09 09:46:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -491,17 +494,26 @@ INSERT INTO `assemblis` (`assembli_id`, `assembly_name`, `district_id`, `ward_zi
 
 CREATE TABLE IF NOT EXISTS `campaigns` (
 `campaign_id` int(11) NOT NULL,
-  `campaign_name` varchar(255) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  `campaign_name` varchar(255) NOT NULL,
+  `district_id` int(11) NOT NULL,
+  `uploaded_date` varchar(100) NOT NULL,
+  `uploaded_by` varchar(100) NOT NULL,
+  `uploaded_ip` varchar(100) NOT NULL,
+  `modified_date` varchar(100) NOT NULL,
+  `modified_by` varchar(100) NOT NULL,
+  `modified_ip` varchar(100) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `campaigns`
 --
 
-INSERT INTO `campaigns` (`campaign_id`, `campaign_name`) VALUES
-(1, 'Main Campaign'),
-(2, 'Internal Campaign'),
-(3, 'Cause Campaign ');
+INSERT INTO `campaigns` (`campaign_id`, `campaign_name`, `district_id`, `uploaded_date`, `uploaded_by`, `uploaded_ip`, `modified_date`, `modified_by`, `modified_ip`) VALUES
+(1, 'Main Campaign', 0, '', '', '', '', '', ''),
+(2, 'Internal Campaign', 0, '', '', '', '', '', ''),
+(3, 'Cause Campaign ', 0, '', '', '', '', '', ''),
+(4, 'demo', 4, '2016-09-09 10:11:45', 'master', '::1', '', '', ''),
+(5, 'd', 1, '2016-09-09 10:12:12', 'master', '::1', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -571,22 +583,14 @@ CREATE TABLE IF NOT EXISTS `district_users` (
   `modified_date` varchar(50) NOT NULL,
   `modified_by` varchar(50) NOT NULL,
   `modified_ip` varchar(50) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `district_users`
 --
 
 INSERT INTO `district_users` (`district_user_id`, `name`, `district_user_email`, `district_user_mobile`, `district_id`, `uploaded_date`, `uploaded_by`, `uploaded_ip`, `modified_date`, `modified_by`, `modified_ip`) VALUES
-(1, '2', 'sdafsa', '444', 0, '2016-09-08 04:19:34', 'master', '::1', '', '', ''),
-(2, 'sadf', 'sdafsa', '444', 1, '2016-09-08 04:20:04', 'master', '::1', '', '', ''),
-(3, 'am', 'am@gmail.com', '17411033779', 8, '2016-09-08 04:39:00', 'master', '::1', '', '', ''),
-(4, 'am', 'am@gmail.com', '17411033779', 8, '2016-09-08 04:39:00', 'master', '::1', '', '', ''),
-(5, 'ajaz', 'aj@gmail', '75855', 1, '2016-09-08 04:39:21', 'master', '::1', '', '', ''),
-(6, 'ajaz', 'aj@gmail', '75855', 1, '2016-09-08 04:39:21', 'master', '::1', '', '', ''),
-(7, 'sadfsa', 'fdsafsa', 'fdsaf', 1, '2016-09-08 04:41:28', 'master', '::1', '', '', ''),
-(8, 'sadfsa', 'fdsafsa', 'fdsaf', 1, '2016-09-08 04:41:28', 'master', '::1', '', '', ''),
-(9, 'agasdfa', 'asdfsa@gmail.com', '8899999', 6, '2016-09-08 04:42:03', 'master', '::1', '', '', '');
+(1, 'nayeem', 'nayeem@gmail.com', '08892776023', 1, '2016-09-09 11:33:22', 'master', '::1', '', '', '');
 
 --
 -- Indexes for dumped tables
@@ -642,7 +646,7 @@ ALTER TABLE `district_users`
 -- AUTO_INCREMENT for table `app_authonticate`
 --
 ALTER TABLE `app_authonticate`
-MODIFY `login_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `login_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `app_leads`
 --
@@ -652,7 +656,7 @@ MODIFY `lead_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=131;
 -- AUTO_INCREMENT for table `app_logins_history`
 --
 ALTER TABLE `app_logins_history`
-MODIFY `login_history_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `login_history_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `assemblis`
 --
@@ -662,7 +666,7 @@ MODIFY `assembli_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=225;
 -- AUTO_INCREMENT for table `campaigns`
 --
 ALTER TABLE `campaigns`
-MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `districts`
 --
@@ -672,7 +676,7 @@ MODIFY `district_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
 -- AUTO_INCREMENT for table `district_users`
 --
 ALTER TABLE `district_users`
-MODIFY `district_user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `district_user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
