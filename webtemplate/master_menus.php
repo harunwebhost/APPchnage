@@ -46,7 +46,7 @@
             Create Users<span class="fa arrow"></span>
             </a>
             <ul class="nav nav-second-level">
-               <li> <a href="view_users.php?show=<?php echo urlencode('Users');?>">Users </a> </li>
+               <li> <a href="list_of_users.php?show=<?php echo urlencode('Users');?>">Users </a> </li>
             </ul>
          </li>
          <!-- 4th menu -->

@@ -42,15 +42,6 @@
                               </select>
                            </div>
 					</div>
-
-					<div class="col-md-6">
-						<div class="form-group">
-                              <label>Select User Type</label>
-                              <select class="form-control" name="field[district_id]" id="district_name">
-                              <?php distric_list(''); ?>
-                              </select>
-                           </div>
-					</div>
 				</div>
 						
 						<?php require_once('hidden_values.php'); ?>

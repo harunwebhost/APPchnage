@@ -24,7 +24,7 @@ $string = $myusername.'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTU
 $string_shuffled = str_shuffle($string);
 $otp = substr($string_shuffled, 1, 7);
 $msg="OTP ".$otp;
-send_sms($mobile,$msg);
+//send_sms($mobile,$msg);
 
 $sql="UPDATE   app_authonticate SET  uniqid='$otp' 
 WHERE login_id='".$get_login_detais['login_id']."'";

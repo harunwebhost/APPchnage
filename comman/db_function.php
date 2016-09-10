@@ -84,6 +84,15 @@ function convert_underscore_into_spaces($title){
 		<?php }
 	}
 
+function userslist(){
+?>
+                <option value="CALLING USER">CALLING USER</option>
+                <option value="AUTHORIZED USER">AUTHORIZED USER</option>
+                 <option value="SUPERVISOR USER">SUPERVISOR USER</option>
+                  <option value="MANAGER USER">MANAGER USER</option>
+<?php 
+} 
+
 
     function distric_list($disctric){
         
@@ -258,8 +267,8 @@ set_time_limit(0);
             return "";
         }
     }
-
-    function logged_distric_users(){
+/*You can delete this funtion*/
+    function logged_distric_users1(){
         $logged_email_address=$_SESSION['login_email'];
         $sql="SELECT * FROM district_users WHERE  district_user_email='$logged_email_address'";
         $excute_sql=execute_sql_query($sql);
@@ -269,5 +278,35 @@ set_time_limit(0);
         $disctric_information['district_user_id']  = $sql_fech_array['district_user_id'];
         return $disctric_information;
     }
+
+    function logged_distric_users(){
+        $logged_email_address=$_SESSION['login_email'];
+        $sql="SELECT * FROM  userslists WHERE  email_address='$logged_email_address'";
+        $excute_sql=execute_sql_query($sql);
+        $sql_fech_array=execute_fetch($excute_sql);
+        $disctric_information['district_user_email']  = $sql_fech_array['email_address'];
+        $disctric_information['district_user_mobile']  = $sql_fech_array['mobile_number'];
+        $disctric_information['district_user_id']  = $sql_fech_array['district_id'];
+         $disctric_information['campaign_id']  = $sql_fech_array['campaign_id'];
+        return $disctric_information;
+    }
+
+    /*Creating calling user list -disctric vaice*/
+
+    function getcallinguserlist(){
+        $logged_distric_users=logged_distric_users();
+        $district_user_id=$logged_distric_users['district_user_id'];
+        $sql_calling="SELECT  * FROM userslists WHERE  district_id='$district_user_id' AND user_type='CALLING USES'";        
+        $resutl_calling=execute_sql_query($sql_calling);
+        while ($get_calling=execute_fetch($resutl_calling)) {
+        ?>
+        <option value="<?php echo $get_calling['userslist_id']?>"><?php echo $get_calling['name'];?></option>
+        <?php 
+    }
+    }
+    getcallinguserlist();
+
+
+
  ?>
 
