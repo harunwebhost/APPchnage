@@ -9,21 +9,27 @@
 						$title="Total Leads";
 					}
 					if($title=="main"){
-						 $get_lead="SELECT * FROM app_leads al,campaigns cmpgs 
-						 WHERE al.campaign_group_name=cmpgs.campaign_id
-						 AND
-						 al.campaign_group_name='1'";
 						 
+						$get_lead="SELECT * FROM app_leads al,campaigns cmpgs , districts dist
+						 WHERE al.campaign_group_name=cmpgs.campaign_id
+						 AND
+						 al.campaign_group_name='1'
+						 AND
+						 al.district_name=dist.district_id";
 					}if($title=="Internal"){
-						$get_lead="SELECT * FROM app_leads al,campaigns cmpgs 
+						$get_lead="SELECT * FROM app_leads al,campaigns cmpgs , districts dist
 						 WHERE al.campaign_group_name=cmpgs.campaign_id
 						 AND
-						 al.campaign_group_name='2'";
+						 al.campaign_group_name='2'
+						 AND
+						 al.district_name=dist.district_id";
 					}if($title=="Cause"){
-						$get_lead="SELECT * FROM app_leads al,campaigns cmpgs 
+						$get_lead="SELECT * FROM app_leads al,campaigns cmpgs , districts dist
 						 WHERE al.campaign_group_name=cmpgs.campaign_id
 						 AND
-						 al.campaign_group_name='3'";
+						 al.campaign_group_name='3'
+						 AND
+						 al.district_name=dist.district_id";
 					}
 
 						$title=$title." Campains Leads";

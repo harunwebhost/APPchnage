@@ -8,7 +8,12 @@
 						$title="Total Leads";
 					}
 					if($title=="assigned"){
-						 $get_lead="SELECT * FROM app_leads al,campaigns cmpgs WHERE al.campaign_group_name=cmpgs.campaign_id";
+						 $get_lead="SELECT * FROM app_leads al,campaigns cmpgs, districts dist 
+						 WHERE 
+						 al.campaign_group_name=cmpgs.campaign_id
+						 AND
+						 al.district_name=dist.district_id	
+						 ";
 						 $campaign_name="";
 					}elseif($title=="un-assigned"){
 						 $get_lead="SELECT * FROM app_leads WHERE campaign_group_name=''";
@@ -31,13 +36,17 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
+                <form action="transfer_leads.php" method="POST">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <?php echo strtoupper($title); ?> 
+							 <?php echo strtoupper($title); ?>
+							<button class="btn btn-warning pull-right" type="submit" id="transfer">Transfer</button>
+        					<div class="clearfix"></div>
+
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <form action="#" method="POST">
+                            
                             <div class="dataTable_wrapper">
                                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 						    <thead>
@@ -73,7 +82,7 @@
 								?>
 						    <tr data-index="0">
 						    <td class="bs-checkbox">
-						    <input data-index="0" name="toolbar1" type="checkbox"></td>
+						    <input data-index="0" name="lead_id[]"  id="lead_id" value="<?php echo $lead_id; ?>" type="checkbox"></td>
 						    <td><?php echo $disp['lead_name'];?></td>
 						    <td><?php echo $disp['lead_email'];?></td>
 						    <td><?php echo $disp['lead_mobile'];?></td>
@@ -89,10 +98,11 @@
                                 </table>
                             </div>
                             <!-- /.table-responsive -->
-                           </form>
+                          
                         </div>
                         <!-- /.panel-body -->
                     </div>
+                     </form>
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-12 -->
@@ -121,12 +131,16 @@
 
  	<script type="text/javascript">
     $(document).ready(function(){
-        //$("#block input,select").attr('readonly',true);
-
-    });
-    $('#block #showdata').on('click', function() {
-       $(this).hide();
-       $('#dispaly').show();
+        $("#transfer").attr('disabled','disabled');
+     $('#lead_id').click(function () {
+		    if ($(this).is(':checked')) {
+		        
+		       $("#transfer").attr('disabled',false);//enable input
+		        
+		    } else {
+		        $("#transfer").attr('disabled', true); //disable input
+		    }	
+	});
 
     });
 

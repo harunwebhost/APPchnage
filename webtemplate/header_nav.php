@@ -6,7 +6,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="dashboard.php"><!-- APP Karnataka --></a>
+                <a class="navbar-brand" href="dashboard.php">APP Karnataka</a>
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-top-links navbar-right font-white">
@@ -33,8 +33,10 @@
                require_once('master_menus.php'); 
             }
             if($_SESSION['login_userntype']=="authorized_user"){
-                require_once('distric_menus.php'); 
-
+                require_once('authorized_user.php'); 
+            }
+            if($_SESSION['login_userntype']=="calling_user"){
+                require_once('calling_user.php'); 
             }
         ?>
 

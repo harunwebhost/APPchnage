@@ -16,12 +16,12 @@ if($count==1){
 	$_SESSION['login_userntype']=$login_userntype;
 	 $page="../".$login_userntype."/dashboard.php";
 
-	page_redirection($page,'Logged In');
+	page_redirection($page,'?message=Logged In');
 		
 }
 else {
 	update_otp($login_id);
-page_redirection("../index.php","Invalid OPT Please Login Again");
+page_redirection("../index.php?","message=Invalid OPT Please Login Again");
 }
 
 

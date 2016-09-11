@@ -29,10 +29,10 @@ $msg="OTP ".$otp;
 $sql="UPDATE   app_authonticate SET  uniqid='$otp' 
 WHERE login_id='".$get_login_detais['login_id']."'";
 $result=execute_sql_query($sql);
-page_redirection("../otp.php","Enter OPT Password");
+page_redirection("../otp.php?","message=Enter OPT Password");
 }
 
 else {
-page_redirection("../index.php","Invalid User Name Password");
+page_redirection("../index.php?","message=Invalid User Name Password");
 }
 ?>

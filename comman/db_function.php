@@ -135,9 +135,13 @@ function get_user_ip_address(){
 	return $user_ip_address=$_SERVER['REMOTE_ADDR'];
 
 }
+
 function page_redirection($pagename,$message){
-    $message=urlencode($message);
-    header("Location:$pagename?message=$message");
+?>
+<script type="text/javascript">
+    document.location="<?php echo $pagename.$message ?>";
+</script>
+<?php 
  }
 	function check_user(){
 		session_start();
@@ -154,16 +158,6 @@ function page_redirection($pagename,$message){
         }
 } 
 
-function logged_user_id(){
-    if(isset($_SESSION['login_username'])){
-        $login_email=sql_injection($_SESSION['login_email']);
-        $get_select_user="SELECT * FROM crm_employer WHERE emp_email='$login_email'";
-        $get_select_user_execute=execute_sql_query($get_select_user);
-        $get_logged_user_array=execute_fetch($get_select_user_execute);
-       return $get_logged_user_id=$get_logged_user_array['emp_id'];
-    }
-
-}    
 
 function check_empty($value){
     if(empty($value)){
@@ -280,23 +274,25 @@ set_time_limit(0);
     }
 
     function logged_distric_users(){
-        $logged_email_address=$_SESSION['login_email'];
+        @$logged_email_address=$_SESSION['login_email'];
         $sql="SELECT * FROM  userslists WHERE  email_address='$logged_email_address'";
         $excute_sql=execute_sql_query($sql);
         $sql_fech_array=execute_fetch($excute_sql);
         $disctric_information['district_user_email']  = $sql_fech_array['email_address'];
         $disctric_information['district_user_mobile']  = $sql_fech_array['mobile_number'];
         $disctric_information['district_user_id']  = $sql_fech_array['district_id'];
-         $disctric_information['campaign_id']  = $sql_fech_array['campaign_id'];
+        $disctric_information['campaign_id']  = $sql_fech_array['campaign_id'];
+        $disctric_information['calling_id']  = $sql_fech_array['userslist_id'];
+         
         return $disctric_information;
     }
 
     /*Creating calling user list -disctric vaice*/
 
     function getcallinguserlist(){
-        $logged_distric_users=logged_distric_users();
+         $logged_distric_users=logged_distric_users();
         $district_user_id=$logged_distric_users['district_user_id'];
-        $sql_calling="SELECT  * FROM userslists WHERE  district_id='$district_user_id' AND user_type='CALLING USES'";        
+        $sql_calling="SELECT  * FROM userslists WHERE  district_id='$district_user_id' AND user_type='CALLING USER'";
         $resutl_calling=execute_sql_query($sql_calling);
         while ($get_calling=execute_fetch($resutl_calling)) {
         ?>
@@ -304,7 +300,61 @@ set_time_limit(0);
         <?php 
     }
     }
-    getcallinguserlist();
+
+
+/*calling user details*/
+
+
+    
+
+
+
+
+
+   
+   function lead_tracker($opration,$lead_id,$upadtevalues){
+
+    $ip=get_user_ip_address();
+    $login_id=$_SESSION['loggin_id'];
+    $logged_user_type=$_SESSION['login_userntype'];
+    $current_time=current_data_time();
+if($opration=="insert" && $upadtevalues==""){
+        /*get lead_id here*/
+        $lead_id=$lead_id;
+        /*get who created*/
+        $what="New created";
+        /*when created*/
+        $when_did="Lead Created By user type".$logged_user_type."Created at".$current_time;
+        /*from which ip created*/
+        $which_ip="Lead created From IP address".$ip;
+        /*why created*/
+        $why="New Lead for process";
+            $sql="insert into   lead_trigger 
+            (`lead_id`,`what`,`when_did`,`which_ip`,`why`) 
+            VALUES
+            ('$lead_id','$what','$when_did','$which_ip','$why')";
+            execute_sql_query($sql);
+}
+if($opration=="update" && !empty($upadtevalues)){
+    /*get lead_id here*/
+         $lead_id=$lead_id;
+        
+        /*get who created*/
+        $what="updated" .$upadtevalues;
+        /*when created*/
+        $when_did="Lead update  By user type".$logged_user_type." modified at".$current_time;
+        /*from which ip created*/
+        $which_ip="Lead update  By IP address".$ip;
+        /*why created*/
+        $why="New Lead for process";
+            $sql="insert into   lead_trigger 
+            (`lead_id`,`what`,`when_did`,`which_ip`,`why`) 
+            VALUES
+            ('$lead_id','$what','$when_did','$which_ip','$why')";
+            execute_sql_query($sql); 
+}
+
+}
 
 
 

@@ -29,6 +29,8 @@
 
 			   <?php require_once('hidden_values.php'); ?>
             <input type="hidden" name="table_name" value="campaigns">
+             <input type="hidden" name="page" value="campain_details.php?show=Cause">
+             <input type="hidden" name="message" value="&message=New campain Created">
 
         	<div class="col-md-10 col-md-offset-4">
                   <div class="form-group">

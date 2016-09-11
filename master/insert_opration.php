@@ -15,5 +15,15 @@ $values=rtrim($values,',');
 $keys=rtrim($keys,',');
 $sql = "INSERT INTO $table ($keys) VALUES ($values)";
  execute_sql_query($sql); 
+
+if(isset($_POST['page']) || isset($_POST['message'])){
+$page=$_POST['page'];
+$message=$_POST['message'];
+page_redirection($page,$message);
+}else{
 page_redirection("view_users.php?show=Users&","&New Account is created");
+
+}
+
+
  ?>

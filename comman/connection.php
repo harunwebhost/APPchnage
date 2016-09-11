@@ -5,7 +5,7 @@ $connection = mysqli_connect('localhost', 'root', '');
 if (!$connection) {
     die("Connection failed: " . mysql_error());
 }else{
-  mysqli_select_db($connection,'orkinn');
+  mysqli_select_db($connection,'app');
 
 } 
 return $connection;
