@@ -24,7 +24,8 @@
          			  $filter_data=sql_injection($x_value);
          			  $values.=$keys."="."'$filter_data',";
          			}
-         		   $values=rtrim($values,',');
+         		
+                  $values=rtrim($values,',');
                   $removecomma=rtrim($_POST['lead_id'],',');
                   $delete_key=explode(",",$removecomma);
                   foreach ($delete_key as $value) {

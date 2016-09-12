@@ -13,16 +13,28 @@
       <!-- /.row -->
       <?php 
          if(isset($_POST['update']) && !empty($_POST['update'])){
-         				 
+         				$table=sql_injection($_POST['table_name']); 
+                $keys="";
+                $values=""; 
+                     $primary_key="lead_id";
+                 $message="Record is updated";
+                foreach($_POST['field'] as $x=>$x_value)
+                {
+                $keys= $x;
+                $filter_data=sql_injection($x_value);
+                $values.=$keys."="."'$filter_data',";
+              }
+            
+                  $values=rtrim($values,',');
                   $removecomma=rtrim($_POST['lead_id'],',');
                   $delete_key=explode(",",$removecomma);
                   foreach ($delete_key as $value) {
                      $update_key=str_replace(',', '',$value );
-                   echo   $sql = "update app_leads SET $values WHERE  $primary_key=$update_key";
-                     $update_values=sql_injection($sql);
-                     //execute_sql_query($sql);
+                     $sql = "INSERT INTO $table ($keys) VALUES ($values)";
+                     echo $update_values=sql_injection($sql);
+                    // execute_sql_query($sql);
                   }
-
+               
 
                            
 
